@@ -6,27 +6,15 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:30:05 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 16:30:23 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:09:10 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "libft/libft.h"
 #include <signal.h>
 #include <stdio.h>
 #include <string.h>
 
-/**
- * @brief    Sends 8 signals to the provided PID to transmit the
- * provided character bit by bit.
- * It starts from the MSB and progressively goes to the LSB.
- *
- * It sends SIGUSR1 if the bit is 1, SIGUSR2 if it is 0.
- *
- * @param    pid       server's PID
- * @param    character character to transmit
- */
 void	send_signal(int pid, unsigned char character)
 {
 	int				i;
@@ -46,12 +34,6 @@ void	send_signal(int pid, unsigned char character)
 	}
 }
 
-/**
- * @brief    Sends a message to the server character by character.
- *
- * @param    argc
- * @param    argv
- */
 int	main(int argc, char *argv[])
 {
 	pid_t		server_pid;

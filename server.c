@@ -6,11 +6,9 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:29:32 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 16:29:34 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/21 19:12:50 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "libft/libft.h"
 #include <signal.h>
@@ -18,27 +16,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#define END_TRANSMISSION '\0'
-
-/**
- * @brief    Checks if the signal is SIGUSR1. If it is, it will
- * assign 1 to the LSB. Else, it will assign 0 (actually it simply
- * won't modify it).
- *
- * Example:
- * 00101100   current_char
- * 00000001   result of (sigsent == SIGUSR1)
- * --------
- * 00101101   result stored in message after the bitwise OR operation
- *
- * It will then increment the bit index.
- * If it is 8, it means that
- * the char has been fully transmitted. It will then print it and
- * reset the bit index and the current char.
- * Else, it will shift the current char to the left by 1.
- *
- * @param    signal    SIGUSR1 or SIGUSR2
- */
 void	handle_signal(int signal)
 {
 	static unsigned char	current_char;
@@ -48,7 +25,7 @@ void	handle_signal(int signal)
 	bit_index++;
 	if (bit_index == 8)
 	{
-		if (current_char == END_TRANSMISSION)
+		if (current_char == '\0')
 			ft_printf("\n");
 		else
 			ft_printf("%c", current_char);
@@ -59,9 +36,6 @@ void	handle_signal(int signal)
 		current_char <<= 1;
 }
 
-/**
- * @brief    Prints its program's PID and calls the signal handlers.
- */
 int	main(void)
 {
 	printf("%d\n", getpid());

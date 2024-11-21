@@ -6,11 +6,9 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:40:18 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:43:52 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:27:44 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 int	ft_intlen(long n)
 {

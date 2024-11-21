@@ -6,11 +6,9 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:40:52 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:44:04 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:27:54 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -6,11 +6,9 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:40:34 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:44:11 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:27:42 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 int	ft_isascii(int c)
 {

@@ -6,11 +6,9 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:40:24 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:44:17 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:27:39 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 int	ft_isalnum(int c)
 {

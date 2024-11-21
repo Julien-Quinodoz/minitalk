@@ -6,11 +6,9 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:40:40 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:44:09 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:27:48 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 int	ft_isdigit(int c)
 {

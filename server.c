@@ -6,7 +6,7 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:29:32 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 19:12:50 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:29:18 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#define END_TRANSMISSION '\0'
 
 void	handle_signal(int signal)
 {
@@ -25,7 +27,7 @@ void	handle_signal(int signal)
 	bit_index++;
 	if (bit_index == 8)
 	{
-		if (current_char == '\0')
+		if (current_char == END_TRANSMISSION)
 			ft_printf("\n");
 		else
 			ft_printf("%c", current_char);

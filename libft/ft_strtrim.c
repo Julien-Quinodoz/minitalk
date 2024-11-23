@@ -5,105 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:55:05 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:05 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 09:57:47 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 10:55:18 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
-static int	ft_strlen(char *str)
+static int	ischar(char c, const char *set)
 {
-	int	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
-}
-
-static int	get_start(char const *s1, char const *set)
-{
-	int	i;
-	int	j;
+	size_t	i;
 
 	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		while (set[j])
-		{
-			if (s1[i] == set[j])
-			{
-				i++;
-				break ;
-			}
-			j++;
-		}
-		if (j == ft_strlen((char *)set))
-			return (i);
-		j = 0;
-	}
+	while (*(set + i))
+		if (*(set + i++) == c)
+			return (1);
 	return (0);
 }
 
-static int	get_end(char const *s1, char const *set)
+static char	*trimming(const char *s1, const char *set, size_t *k, size_t i)
 {
-	int	str_length;
-	int	j;
+	size_t	j;
+	size_t	len;
+	char	*dst;
 
-	str_length = 0;
+	len = ft_strlen(s1);
 	j = 0;
-	while (s1[str_length])
-		str_length++;
-	while (str_length > 0)
+	while (ischar(*(s1 + len - j - 1), set))
+		j++;
+	dst = ft_calloc(sizeof(char), len - (j + i) + 1);
+	if (dst == NULL)
+		return (NULL);
+	while (*k < len - (j + i))
 	{
-		while (set[j])
-		{
-			if (s1[str_length - 1] == set[j])
-			{
-				str_length--;
-				break ;
-			}
-			j++;
-		}
-		if (j == ft_strlen((char *)set))
-			return (str_length);
-		j = 0;
+		*(dst + *k) = *(s1 + i + *k);
+		*k += 1;
 	}
-	return (0);
+	return (dst);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(const char *s1, const char *set)
 {
-	int		start;
-	int		end;
-	int		i;
-	char	*trimmed;
+	size_t	i;
+	size_t	k;
+	size_t	len;
+	char	*dst;
 
-	start = get_start(s1, set);
-	end = get_end(s1, set);
-	trimmed = malloc((end - start + 1) * sizeof(char));
+	if (s1 == NULL)
+		return (NULL);
 	i = 0;
-	if (!trimmed)
-		return (trimmed);
-	while (start < end)
-	{
-		trimmed[i] = s1[start];
-		start++;
+	len = ft_strlen(s1);
+	while (ischar(*(s1 + i), set))
 		i++;
-	}
-	trimmed[i] = '\0';
-	return (trimmed);
+	k = 0;
+	if (i == len)
+		dst = malloc(1);
+	else
+		dst = trimming(s1, set, &k, i);
+	if (dst != NULL)
+		*(dst + k) = '\0';
+	return (dst);
 }
+/*
+ DESCRIPTION :
+ La fonction prend une chaîne et la coupe debut et fin par set
 
-// int main(void)
-// {
-//     char string[] = "          ";
-// 	char set[] = " ";
-// 	printf("Start of %s is %d\n", string, get_start(string, set));
-// 	printf("End of %s is %d\n", string, get_end(string, set));
-// 	printf("Trimmed %s is %s\n", string, ft_strtrim(string, set));
-// 	return (0);
-// }
+Le rognage (trim) signifie supprimer les caractères spécifiés dans
+ la chaîne (SET) du début ET de la fin de la chaîne s1, sans supprimer
+ les caractères qui se trouvent au milieu de la chaîne s1.
+ exemple :
+            ababaaaMy name is Julienbbaaabbad   SET = ab
+resultat : My name is Julien
+
+boucler sur la chaîne; avancer pendant que nous avons un caractère à supprimer.
+puis la même chose à partir de la fin de la chaîne, ce qui nous laisse
+avec un index de début et de fin pour notre chaîne coupée.
+
+*/

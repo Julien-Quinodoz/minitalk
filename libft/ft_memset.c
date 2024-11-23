@@ -5,23 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:47:19 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:49:04 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/09/30 15:36:19 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/15 13:55:10 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	size_t			count;
-	unsigned char	*pointer_copy;
+	unsigned char	*tmp_str;
 
-	count = 0;
-	pointer_copy = (unsigned char *)s;
-	while (count < n)
+	tmp_str = b;
+	while (len > 0)
 	{
-		pointer_copy[count++] = (unsigned char)c;
+		*tmp_str = (unsigned char)c;
+		tmp_str++;
+		len--;
 	}
-	return (pointer_copy);
+	return (b);
 }
+
+/*
+
+
+Descrition:
+La fonction memset() remplit les n premiers octets de la zone
+*mémoire pointée par b avec l'octet .. c.
+*//*
+VALEUR RENVOYEE : La fonction memset( renvoie un pointeur sur la zone
+mémoire b.
+*/
+/*
+déclare un caractère temporaire non signé
+déclare un caractère temporaire non signé
+*/
+/* boucle sur la variable temporaire alors qu'on n'a pas atteint len dans
+cette boucle, définit l'octet actuel égal à c converti en caractère non signé
+*/
+/*
+retour du premier paramètre de la fonction vide *b *
+*/

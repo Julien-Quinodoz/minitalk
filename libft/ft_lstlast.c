@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_width.c                                   :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:47:28 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:49:04 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/16 14:42:41 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 14:50:00 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_parse_width(const char *format, int *i, t_flags *flags, va_list *args)
+t_list	*ft_lstlast(t_list *lst)
 {
-	int	count;
-
-	count = 0;
-	if (format[*i] == '*')
-	{
-		flags->width = va_arg(*args, int);
-		if (flags->width < 0)
-		{
-			flags->minus = 1;
-			flags->width = -flags->width;
-		}
-	}
-	else if (ft_isdigit(format[*i]))
-	{
-		flags->width = ft_atoi(&format[*i]);
-		*i += ft_intlen(flags->width) - 1;
-	}
-	count += ft_intlen(flags->width);
-	return (count);
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
+/*
+Renvoie le dernier élément de la liste.
+*/

@@ -1,21 +1,96 @@
-NAME		=	libft.a
-CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra
-OBJ			=	ft_isalnum.o ft_itoa.o ft_memset.o ft_split.o ft_strlcat.o ft_strnstr.o ft_toupper.o ft_isalpha.o ft_memchr.o ft_putchar_fd.o ft_strchr.o ft_strlcpy.o ft_strrchr.o ft_atoi.o ft_isascii.o ft_memcmp.o ft_putendl_fd.o ft_strdup.o ft_strlen.o ft_strtrim.o ft_bzero.o ft_isdigit.o ft_memcpy.o ft_putnbr_fd.o ft_striteri.o ft_strmapi.o ft_substr.o ft_calloc.o ft_isprint.o ft_memmove.o ft_putstr_fd.o ft_strjoin.o ft_strncmp.o ft_tolower.o ft_lstnew_bonus.o ft_lstadd_front_bonus.o ft_lstsize_bonus.o ft_lstlast_bonus.o ft_lstadd_back_bonus.o ft_lstdelone_bonus.o ft_lstclear_bonus.o ft_lstiter_bonus.o ft_lstmap_bonus.o ft_intlen.o get_next_line.o get_next_line_utils.o ft_parse_width.o ft_print_padding.o ft_print_char.o ft_print_string.o ft_print_pointer.o ft_print_int.o ft_print_unsigned.o ft_print_hexa.o ft_print_percent.o ft_printf.o
-HEADERS	=	libft.h
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/10/01 19:02:10 by jquinodo          #+#    #+#              #
+#    Updated: 2024/11/23 11:16:00 by jquinodo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-all: $(NAME)
+ SRCS =	ft_atoi.c \
+		ft_bzero.c \
+		ft_calloc.c \
+		ft_isalnum.c \
+		ft_isalpha.c \
+		ft_isascii.c \
+		ft_isdigit.c \
+		ft_isprint.c \
+		ft_memchr.c \
+		ft_memcmp.c \
+		ft_memcpy.c \
+		ft_memmove.c \
+		ft_memset.c \
+		ft_strchr.c \
+		ft_strdup.c \
+		ft_strlcat.c \
+		ft_strlcpy.c \
+		ft_strlen.c \
+		ft_strncmp.c \
+		ft_strnstr.c \
+		ft_strrchr.c \
+		ft_tolower.c \
+		ft_toupper.c \
+		ft_substr.c \
+		ft_strjoin.c \
+		ft_strtrim.c \
+		ft_split.c \
+		ft_itoa.c \
+		ft_strmapi.c \
+		ft_striteri.c \
+		ft_putchar_fd.c \
+		ft_putstr_fd.c \
+		ft_putendl_fd.c \
+		ft_putnbr_fd.c \
+		ft_lstnew.c \
+		ft_lstadd_front.c \
+		ft_lstsize.c \
+		ft_lstlast.c \
+		ft_lstadd_back.c \
+		ft_lstdelone.c \
+		ft_lstclear.c \
+		ft_lstiter.c \
+		ft_lstmap.c \
+		ft_ptf_putstr.c \
+		ft_ptf_putptr.c \
+		ft_ptf_putnbr_hexa.c \
+		ft_ptf_putnbr.c \
+		ft_ptf_putchar.c \
+		ft_printf.c
 
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+NAME	=	libft.a
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $<
+OBJ	= $(SRCS:.c=.o)
 
-clean:
-	rm -f $(OBJ)
+CC		= gcc
 
-fclean: clean
-	rm -f $(NAME)
+RM		= rm -rf
 
-re: fclean $(NAME)
+AR		= ar rcs
+
+RANLIB		= ranlib
+
+CFLAGS += -Wall -Werror -Wextra -g
+
+LFLAGS += -I.
+
+all	:	$(NAME)
+
+$(NAME)	:	$(OBJ)
+		$(AR) $(NAME) $(OBJ)
+		$(RANLIB) $(NAME)
+
+%.o:	%.c
+		$(CC) $(CFLAGS) -c $< -o $@ $(LFLAGS)
+
+clean	:
+		$(RM) $(OBJ)
+
+fclean	:	clean
+		$(RM) $(NAME)
+
+re	:	fclean all
+
+.PHONY:		all clean fclean re

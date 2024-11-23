@@ -5,45 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:47:11 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:49:04 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 09:35:34 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/15 15:04:30 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	size_t			i;
-	unsigned char	*src_pointer;
-	unsigned char	*dest_pointer;
+	char	*tmp_src;
+	char	*dest;
 
-	if (src == NULL && dest == NULL)
-		return (0);
-	i = 0;
-	src_pointer = (unsigned char *)src;
-	dest_pointer = (unsigned char *)dest;
-	if (dest_pointer > src_pointer)
-		while (n-- != 0)
-			dest_pointer[n] = src_pointer[n];
-	else
+	tmp_src = (char *)src;
+	dest = (char *)dst;
+	if (tmp_src < dest)
 	{
-		while (i < n)
-		{
-			dest_pointer[i] = src_pointer[i];
-			i++;
-		}
+		while (n--)
+			dest[n] = tmp_src[n];
 	}
-	return (dest);
+	else
+		ft_memcpy(dest, tmp_src, n);
+	return (dst);
 }
+/*
+Astuces:
+si pas de chevauchement : memcpy
+si chevauchement : commencer a copier par la fin pour pas perdre des données
 
-// int	main(void)
-// {
-// 	char	str[] = "Start stop";
+Explication compréhensible:
+Memmove fait la même chose que la memcpy
+ mais cette fois, la copie est faite, comme dit dans le man, de manière
+ non destructive.
+  Cela signifie que les deux chaînes (src et dst) peuvent
+  se chevaucher en mémoire et que cette fonction n'écrase pas une partie ou
+  la totalité de la chaîne lors de la copie.
 
-// 	printf("The string: %s\n", str);
-// 	ft_memmove(str, str + 2, 3 * sizeof(char));
-// 	printf("New string: %s\n", str);
+   Le MAN parle de chevauchement de mémoire:
+ copie de S1 dans S2
+ S1 commence a copier a partir de la case 4 de S2
+ a partire de la case 4 : on retrouvera S1 ...
 
-// 	return (0);
-// }
+ VALEUR RENVOYEE : La fonction renvoie un pointeur sur dst.
+
+*/

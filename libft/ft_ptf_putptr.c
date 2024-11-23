@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_ptf_putptr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:41:27 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:44:07 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/11/23 10:05:06 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/11/23 10:12:59 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+int	ft_ptf_putptr(void *ptr)
 {
-	t_list	*current;
+	int	len;
+	int	aux;
 
-	if (!lst || !del)
-		return ;
-	del(lst->content);
-	current = lst;
-	lst = current->next;
-	free(current);
-	lst = 0;
+	len = 0;
+	aux = 0;
+	if (ft_ptf_putstr("0x") == -1)
+		return (-1);
+	len += 2;
+	aux = ft_ptf_putnbr_hexa((unsigned long)ptr, 'x');
+	if (aux == -1)
+		return (-1);
+	len += aux;
+	return (len);
 }

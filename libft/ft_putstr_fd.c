@@ -5,32 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:53:47 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:38 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 10:09:11 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 10:35:47 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-static int	ft_strlen(char *str)
-{
-	int	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
-}
+#include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (!s || !fd)
-		return ;
-	write(fd, s, ft_strlen(s));
-}
+	int	i;
 
-// int	main(void)
-// {
-// 	ft_putstr_fd("Salut bg", 1);
-// 	return (0);
-// }
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+/*
+ecrit une string  sur sortie donnée ( fd )
+*/

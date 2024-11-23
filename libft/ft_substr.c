@@ -5,88 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:55:10 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:08 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/02 17:30:12 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 10:53:11 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
-static size_t	ft_strlen(char const *str)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
-}
-
-static void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	size_t			count;
-	unsigned char	*dest_copy;
-	unsigned char	*src_copy;
-
-	if (!dest && !src)
-		return (0);
-	count = 0;
-	dest_copy = (unsigned char *)dest;
-	src_copy = (unsigned char *)src;
-	while (count < n)
-	{
-		dest_copy[count] = (unsigned char)src_copy[count];
-		count++;
-	}
-	return (dest);
-}
-
-static char	*ft_strdup(char *src)
-{
-	int		length;
-	char	*copy;
-
-	length = 0;
-	while (src[length])
-		length++;
-	copy = malloc(sizeof(char) * length + 1);
-	if (!copy)
-		return (0);
-	length = 0;
-	while (src[length])
-	{
-		copy[length] = src[length];
-		length++;
-	}
-	copy[length] = '\0';
-	return (copy);
-}
-
-char	*ft_substr(const char *s, unsigned int start, size_t len)
-{
-	char	*ret;
+	size_t	i;
+	char	*str;
 
 	if (!s)
-		return (0);
-	if (ft_strlen(s) < start)
+		return (NULL);
+	if (start > ft_strlen(s))
 		return (ft_strdup(""));
-	if (ft_strlen(s) < start + len)
-		len = ft_strlen(s) - start;
-	ret = malloc(sizeof(char) * (len + 1));
-	if (!ret)
-		return (0);
-	ft_memcpy(ret, s + start, len);
-	ret[len] = 0;
-	return (ret);
+	if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	str = ft_calloc(len + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	return (str);
 }
+/*
+la fonction renvoie une sous-chaîne tronquee de la chaîne spassée en paramètre.
 
-// int main(void)
-// {
-//  char *str = "i just want this part #############";
-//  size_t size = 22;
-//  char *ret = ft_substr(str, 35, size);
-// 	printf("str: %s\n", str);
-// 	printf("ret: %s\n", ret);
-// 	return (0);
-// }
+Nous devons d’abord vérifier si l’ startindex est supérieur à la longueur
+de la chaîne ou non.
+
+Nous devons également vérifier si le startplus le lenest supérieur à la longueur
+de la chaîne entière.
+
+Ensuite, nous allouons suffisamment de mémoire pour la sous-chaîne et
+copions s[start]  jusqu'à ce que nous atteignions len  les caractères copiés
+dans notre nouvelle chaîne.
+
+Et enfin, nous pouvons renvoyer la sous-chaîne.
+*/

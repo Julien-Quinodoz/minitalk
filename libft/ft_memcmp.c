@@ -5,40 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:42:56 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:44:28 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 09:36:36 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/15 16:20:24 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
-	unsigned char	*s1_pointer;
-	unsigned char	*s2_pointer;
+	int				i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
 	i = 0;
-	s1_pointer = (unsigned char *)s1;
-	s2_pointer = (unsigned char *)s2;
-	while (i < n)
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (n--)
 	{
-		if (s1_pointer[i] != s2_pointer[i])
-			return (s1_pointer[i] - s2_pointer[i]);
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i++;
 	}
 	return (0);
 }
+/*
+Explication compréhensible
+la fonction compare les chaînes d'octets. Son fonctionnement est similaire
+à celui de la fonction strncmp().
 
-// int	main(void)
-// {
-// 	char	*s1;
-// 	char	*s2;
+La différence est que ellr fonctionne avec des chaînes d'octets, donc cela prend
+des pointeurs vides comme paramètre, plus un troisième caractère, représentant,
+comme indiqué dans le man, la longueur supposée des deux chaînes.
+Cela signifie que cela memcmp() ne comparera pas plus de   n    octets.
 
-// 	s1 = "\0euuh ?";
-// 	s2 = "\0euuh \0?";
-// 	printf("memcmp returned %d\n", memcmp(s1, s2, 10));
-// 	printf("ft_memcmp returned %d\n", ft_memcmp(s1, s2, 10));
-// 	return (0);
-// }
+
+VALEUR RENVOYEE :
+La valeur renvoyée dépend de la différence trouvée.
+
+ Si les deux chaînes sont identiques, le résultat renvoyé sera le même, 0
+ car il n'y a aucune différence. (s1 - s2)
+
+ S'il y a une différence et que le premier caractère différent
+ dans s2 est supérieur au caractère à la même place dans s1,
+ le résultat renvoyé sera négatif. (s1 - s2)
+ Si le contraire, le resultat sera positif
+
+
+*/

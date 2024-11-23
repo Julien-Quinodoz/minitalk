@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_ptf_putnbr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:41:43 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:44:20 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/11/23 10:02:16 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/11/23 10:13:43 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+int	ft_ptf_putnbr(long nb)
 {
-	t_list	*new;
-	t_list	*node;
+	long		num;
+	int			i;
+	int			aux;
 
-	if (!lst)
-		return (0);
-	new = 0;
-	while (lst)
+	i = 0;
+	if (nb < 0)
 	{
-		node = ft_lstnew(f(lst->content));
-		if (node)
-		{
-			ft_lstadd_back(&new, node);
-			lst = lst->next;
-		}
-		else
-		{
-			ft_lstclear(&new, del);
-			return (0);
-		}
+		if (write(1, "-", 1) == -1)
+			return (-1);
+		i += 1;
+		nb *= -1;
 	}
-	return (new);
+	num = nb % 10 + '0';
+	if (nb > 9)
+	{
+		aux = ft_ptf_putnbr(nb / 10);
+		if (aux == -1)
+			return (-1);
+		i += aux;
+	}
+	if (write(1, &num, 1) == -1)
+		return (-1);
+	i += 1;
+	return (i);
 }

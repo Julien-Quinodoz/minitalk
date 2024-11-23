@@ -5,80 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:40:52 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 18:27:54 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 09:58:28 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/17 15:45:01 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
-static int	get_digits(long int n)
+static int	len_int(long num)
 {
-	int	count;
+	int	i;
 
-	count = 1;
-	while (n >= 10)
+	i = 0;
+	if (num == 0)
+		return (1);
+	if (num < 0)
+		i++;
+	while (num != 0)
 	{
-		n /= 10;
-		count++;
+		num = num / 10;
+		i++;
 	}
-	return (count);
+	return (i);
 }
-
-// static void	ft_rev_tab(char *tab, int size)
-// {
-// 	int		i;
-// 	char	*array;
-
-// 	i = 0;
-// 	array = malloc((size + 1) * sizeof(char));
-// 	if (!array)
-// 		return ;
-// 	while (i < size)
-// 	{
-// 		array[i] = *tab;
-// 		if (i != size - 1)
-// 			tab++;
-// 		i++;
-// 	}
-// 	i--;
-// 	tab -= (size - 1);
-// 	while (i >= 0)
-// 	{
-// 		*tab++ = array[i];
-// 		i--;
-// 	}
-// }
 
 char	*ft_itoa(int n)
 {
-	int			digit_count;
-	char		*result;
-	long int	n_copy;
+	long	len;
+	long	nb;
+	char	*result;
 
-	n_copy = n;
-	if (n_copy < 0)
-		n_copy *= -1;
-	digit_count = get_digits(n_copy);
+	len = len_int(n);
+	nb = n;
 	if (n < 0)
-		digit_count++;
-	result = malloc((digit_count + 1) * sizeof(char));
+		nb *= -1;
+	result = malloc(sizeof(char) * (len + 1));
 	if (!result)
-		return (0);
-	result[digit_count--] = '\0';
-	while (digit_count >= 0)
+		return (NULL);
+	result[len] = 0;
+	if (nb == 0)
+		result[0] = '0';
+	else
 	{
-		result[digit_count--] = (n_copy % 10) + '0';
-		n_copy /= 10;
+		while (len--, nb != 0)
+		{
+			result[len] = (nb % 10) + '0';
+			nb = (nb - (nb % 10)) / 10;
+		}
+		if (n < 0)
+			result[len] = '-';
 	}
-	if (n < 0)
-		result[0] = '-';
 	return (result);
 }
-
-// int	main(void)
-// {
-// 	printf("%s\n", ft_itoa(-2147483648));
-// 	return (0);
-// }
+/*
+int  to  Ascii
+Alloue (avec malloc) et renvoie une chaîne représentant
+l'entier reçu en argument.
+Les nombres négatifs doivent être gérés.
+*/

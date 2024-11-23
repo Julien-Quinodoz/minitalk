@@ -5,118 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:48:39 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:49:04 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/22 13:51:27 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/11/23 11:31:07 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	ft_parse_flags(const char *format, int *i, t_flags *flags,
-		va_list *args)
+static int	chek_format(const char type, va_list args)
 {
-	int	count;
-
-	count = 0;
-	while (format[*i] == '-' || format[*i] == '0' || format[*i] == '*'
-		|| format[*i] == '+' || format[*i] == '#' || format[*i] == ' '
-		|| ft_isdigit(format[*i]))
-	{
-		if (format[*i] == '-')
-			flags->minus = 1;
-		else if (format[*i] == '0')
-			flags->zero = 1;
-		else if (format[*i] == '*')
-			count += ft_parse_width(format, i, flags, args);
-		else if (format[*i] == '+')
-			flags->plus = 1;
-		else if (format[*i] == '#')
-			flags->hash = 1;
-		else if (format[*i] == ' ')
-			flags->space = 1;
-		else if (ft_isdigit(format[*i]))
-			count += ft_parse_width(format, i, flags, args);
-		(*i)++;
-	}
-	return (count);
+	if (type == 'c')
+		return (ft_ptf_putchar(va_arg(args, int)));
+	else if (type == 'u')
+		return (ft_ptf_putnbr(va_arg(args, unsigned int)));
+	else if ((type == 'i') || (type == 'd'))
+		return (ft_ptf_putnbr(va_arg(args, int)));
+	else if (type == 's')
+		return (ft_ptf_putstr(va_arg(args, char *)));
+	else if (type == 'x' || type == 'X')
+		return (ft_ptf_putnbr_hexa(va_arg(args, unsigned int), type));
+	else if (type == 'p')
+		return (ft_ptf_putptr(va_arg(args, void *)));
+	else if (type == '%')
+		return (ft_ptf_putchar('%'));
+	return (-1);
 }
 
-int	ft_parse_precision(const char *format, int *i, t_flags *flags)
-{
-	int	count;
-
-	count = 0;
-	if (format[*i] == '.')
-	{
-		*i += 1;
-		flags->precision = ft_atoi(&format[*i]);
-		*i += ft_intlen(flags->precision);
-		count++;
-	}
-	return (count);
-}
-
-int	ft_parser(const char *format, int *i, va_list *args)
-{
-	int		count;
-	t_flags	flags;
-
-	ft_memset(&flags, 0, sizeof(t_flags));
-	count = 0;
-	count += ft_parse_flags(format, i, &flags, args);
-	ft_parse_precision(format, i, &flags);
-	if (format[*i] == 'c')
-		count += ft_print_char(va_arg(*args, int));
-	else if (format[*i] == 's')
-		count += ft_print_string(va_arg(*args, char *));
-	else if (format[*i] == 'p')
-		count += ft_print_pointer(va_arg(*args, unsigned long long), &flags);
-	else if (format[*i] == 'd' || format[*i] == 'i')
-		count += ft_print_int(va_arg(*args, int), &flags);
-	else if (format[*i] == 'u')
-		count += ft_print_unsigned(va_arg(*args, unsigned int));
-	else if (format[*i] == 'x' || format[*i] == 'X')
-		count += ft_print_hexa(va_arg(*args, unsigned int), format[*i], &flags);
-	else if (format[*i] == '%')
-		count += ft_print_percent();
-	return (count);
-}
-
-int	ft_printf(const char *format, ...)
+int	ft_printf(char const *str, ...)
 {
 	va_list	args;
 	int		i;
-	int		count;
+	int		check;
 
-	va_start(args, format);
+	va_start(args, str);
 	i = 0;
-	count = 0;
-	while (format[i])
+	while (*str)
 	{
-		if (format[i] == '%')
+		if (*str == '%')
 		{
-			i++;
-			count += ft_parser(format, &i, &args);
+			check = chek_format(*(++str), args);
+			if (check == -1)
+				return (-1);
+			i += check;
 		}
 		else
 		{
-			ft_putchar_fd(format[i], 1);
-			count++;
+			if (write(1, str, 1) == -1)
+				return (-1);
+			i++;
 		}
-		i++;
+		str++;
 	}
 	va_end(args);
-	return (count);
+	return (i);
 }
-
-// int	main(void)
-// {
-// 	int	printf_ret;
-// 	int	ft_printf_ret;
-
-// 	printf_ret = printf(" %d ", -1);
-// 	ft_printf_ret = ft_printf(" %d ", -1);
-// 	printf("Printf: %d and ft_printf: %d\n", printf_ret, ft_printf_ret);
-// 	return (0);
-// }

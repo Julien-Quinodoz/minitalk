@@ -5,58 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:54:15 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:14 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/02 18:14:25 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/15 16:48:14 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-static int	ft_strlen(char const *str)
-{
-	int	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-	return (count);
-}
+#include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*join;
+	char	*res;
 	int		i;
 	int		j;
 
-	if (!s1 || !s2)
-		return (0);
-	join = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!join)
-		return (0);
 	i = 0;
 	j = 0;
+	res = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
 	while (s1[i])
-	{
-		join[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		join[i] = s2[j];
-		i++;
-		j++;
-	}
-	join[i] = '\0';
-	return (join);
+		res[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		res[j++] = s2[i++];
+	res[j] = s2[i];
+	return (res);
 }
+/*
+Cette fonction fonctionne exactement  de la même manière que
+ft_strlcat  (concaténer deux chaînes mais , elle terminera
+toujours la chaîne par NUL)
+mais au lieu de lui passer un destination string qui doit être correctement
+alloué en tant que paramètre, nous ne passons que deux strings et ft_strjoin
+allouerons la mémoire requise pour les deux plus le caractère de terminaison NUL.
 
-// int	main(void)
-// {
-// 	char *s1 = "where is my ";
-// 	char *s2 = "malloc ???";
+s1 sera la première chaîne dans le résultat, s2la seconde.
 
-// 	char *res = ft_strjoin(s2, s1);
-// 	printf("Output is %s\n", res);
-// 	return (0);
-// }
+Nous devons obtenir la longueur des deux chaînes afin de pouvoir
+allouer suffisamment de mémoire pour les deux.
+
+puis allouer suffisamment de mémoire pour la chaîne et le caractère de
+terminaison NUL.
+
+Nous copions ensuite s1dans notre chaîne nouvellement allouée, puis nous copions
+s2, et enfin nous pouvons définir le dernier caractère comme NUL.
+
+}*/

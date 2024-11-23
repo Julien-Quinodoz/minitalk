@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:41:37 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:43:35 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/16 14:36:08 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 14:40:45 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*current;
+	int	i;
 
-	if (!lst)
-		return (0);
-	current = lst;
-	while (current->next)
-		current = current->next;
-	return (current);
+	i = 0;
+	while (lst != NULL)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
 }
+/*
+Compte le nombre d'éléments dans une liste.
+*/

@@ -5,57 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:53:59 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:35 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 09:40:38 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 10:51:37 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-
-// char	*ft_strchr(const char *s, int c)
-// {
-// 	int	index;
-
-// 	index = 0;
-// 	while (s[index])
-// 	{
-// 		if (s[index] == c)
-// 			return ((char *)&s[index]);
-// 		index++;
-// 	}
-// 	if (c == '\0')
-// 		return ((char *)&s[index]);
-// 	return (0);
-// }
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	size_t			index;
-	unsigned char	*s_pointer;
+	int		i;
+	char	ch;
+	char	*str;
 
-	index = 0;
-	s_pointer = (unsigned char *)s;
-	while (s_pointer[index])
+	i = 0;
+	ch = (char)c;
+	str = (char *)s;
+	while (str[i])
 	{
-		if (s_pointer[index] == (unsigned char)c)
-			return ((char *)&s_pointer[index]);
-		index++;
+		if (str[i] == ch)
+			return (str + i);
+		i++;
 	}
-	if (c == '\0' || c == 1024)
-		return ((char *)&s_pointer[index]);
-	return (0);
+	if (str[i] == '\0' && ch == '\0')
+		return (str + i);
+	return (NULL);
 }
+/*
+Explication compréhensible
+La fonction recherche un caractère dans une chaîne.
+Si elle trouve le caractère, elle renvoie un pointeur vers la première
+ occurrence de ce caractère spécifique.
 
-// int	main(void)
-// {
-// 	char	c;
-// 	char	*s;
+S'il ne trouve aucune occurrence de ce caractère, il renvoie NULL.
 
-// 	c = 'u';
-// 	s = "euuuuuh ?";
-// 	printf("strchr returned %s\n", strchr("teste", 1024));
-// 	printf("ft_strchr returned %s\n", ft_strchr("teste", 1024));
-// 	printf("Théo Babac returned %s\n", s);
-// 	return (0);
-// }
+
+retour :
+Nous devons également renvoyer un pointeur vers le caractère
+si le caractère est \0.
+
+*/

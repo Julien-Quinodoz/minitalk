@@ -5,12 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:40:29 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 18:27:50 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 09:43:40 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 10:07:54 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_isalpha(int c)
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (c);
+	return (0);
 }

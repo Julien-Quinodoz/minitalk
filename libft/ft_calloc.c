@@ -5,26 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 16:42:05 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 18:27:46 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 10:28:14 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/17 16:29:39 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	*ft_calloc(size_t nelem, size_t elsize)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t			i;
-	unsigned char	*pointer;
+	char			*mem;
+	unsigned int	total;
+	unsigned int	i;
 
-	pointer = malloc(nelem * elsize);
-	if (!pointer)
-		return (0);
+	total = nmemb * size;
+	mem = malloc(total);
+	if (!mem)
+		return (NULL);
 	i = 0;
-	while (i < (nelem * elsize))
+	while (total--)
 	{
-		pointer[i] = 0;
+		mem[i] = 0;
 		i++;
 	}
-	return (pointer);
+	return ((void *)mem);
 }
+/*
+Explication compréhensible
+
+elle  fonctionne de la même manière que malloc() , mais la différence
+est que avec calloc() tous les octets de mémoire sont définis par    0
+ au lieu de rester en  charabia qui était là en mémoire avant
+ que nous l'allouions.
+
+*/

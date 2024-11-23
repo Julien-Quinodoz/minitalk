@@ -5,15 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:55:21 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:31 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 09:45:55 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 10:17:33 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
+	if (c >= 97 && c <= 122)
 		return (c - 32);
-	else
-		return (c);
+	return (c);
 }
+/*
+convertit une lettre minuscule en la lettre majuscule correspondante.
+*/

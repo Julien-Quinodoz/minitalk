@@ -6,7 +6,7 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:29:32 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/23 09:19:02 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:43:30 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	handle_signal(int signal)
 	static unsigned char	create_char;
 	static int				bit_index;
 
-
-create_char |= (signal == SIGUSR1);
+	create_char |= (signal == SIGUSR1);
 	bit_index++;
 	if (bit_index == 8)
 	{
@@ -35,7 +34,7 @@ create_char |= (signal == SIGUSR1);
 
 int	main(void)
 {
-	printf("%d\n", getpid());
+	ft_printf("%d\n", getpid());
 	signal(SIGUSR1, handle_signal);
 	signal(SIGUSR2, handle_signal);
 	while (1)

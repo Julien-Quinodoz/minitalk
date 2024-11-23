@@ -5,35 +5,43 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 16:41:53 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 18:26:58 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 09:43:15 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 10:55:41 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {
-	int		i;
-	int		negative;
-	int		result;
+	int	negatif;
+	int	i;
+	int	nbr;
 
+	negatif = 1;
 	i = 0;
-	negative = 1;
-	result = 0;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-		|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+	nbr = 0;
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r')
 		i++;
-	if (str[i] == '-')
-		negative *= -1;
 	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result = (result * 10) + (str[i] - '0');
+		if (str[i] == '-')
+			negatif = negatif * -1;
 		i++;
 	}
-	result *= negative;
-	return (result);
+	while (str[i] >= '0' && str[i] <= '9' && str[i])
+	{
+		nbr = nbr * 10;
+		nbr += str[i] - '0';
+		i++;
+	}
+	return (nbr * negatif);
 }
+/*
+Converti ASCII en INT
+
+eliminer les isspace
+determiner positif ou negatif
+convertion en int
+*/

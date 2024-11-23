@@ -6,7 +6,7 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:30:05 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/23 09:19:07 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:11:44 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	send_signal(int pid, unsigned char c)
 			kill(pid, SIGUSR2);
 		else
 			kill(pid, SIGUSR1);
-		usleep(400);
+		usleep(500);
 	}
 }
 

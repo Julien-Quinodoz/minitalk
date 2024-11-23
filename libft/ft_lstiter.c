@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_string.c                                  :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:48:23 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:49:04 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/01 10:11:31 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 15:14:57 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_print_string(char *str)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (ft_print_string("(null)"));
-	while (str[i])
+	while (lst)
 	{
-		ft_putchar_fd(str[i], 1);
-		i++;
+		f(lst->content);
+		lst = lst->next;
 	}
-	return (i);
 }
+/*
+Paramètres
+lst: L’adresse du pointeur vers un élément.
+f: L’adresse de la fonction à appliquer.
+
+Itère sur la liste ’lst’ et applique la fonction ’f’ au contenu chaque élément.
+
+*/

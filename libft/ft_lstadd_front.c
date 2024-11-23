@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:48:29 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:49:04 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/16 14:21:04 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 14:25:15 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_print_unsigned(unsigned int n)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	count;
+	t_list	*tmp;
 
-	count = 0;
-	if (n >= 10)
-		count += ft_print_unsigned(n / 10);
-	ft_putchar_fd(n % 10 + '0', 1);
-	count++;
-	return (count);
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	tmp = *lst;
+	*lst = new;
+	new -> next = tmp;
 }
+/*
+Ajoute l'élément « nouveau » au début de la liste.
+*/

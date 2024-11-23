@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 17:55:29 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:29 by jquinodo         ###   ########.fr       */
+/*   Created: 2024/10/16 14:53:38 by jquinodo          #+#    #+#             */
+/*   Updated: 2024/10/16 15:00:05 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	get_nl_index(char *stash)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int	i;
+	t_list	*tmp;
 
-	i = 0;
-	while (stash[i] && stash[i] != '\n')
-		i++;
-	return (i);
+	tmp = ft_lstlast(*lst);
+	if (tmp)
+		tmp->next = new;
+	else
+		*lst = new;
 }
+/*
+Ajoute l'élément « nouveau new » à la fin de la liste.
+*/

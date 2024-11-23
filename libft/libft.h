@@ -6,7 +6,7 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:55:45 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/21 17:56:24 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:27:54 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <signal.h>
+# include <stdio.h>
 
 // Original libft
 int					ft_atoi(const char *str);

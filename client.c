@@ -6,26 +6,23 @@
 /*   By: jquinodo <jquinodo@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 16:30:05 by jquinodo          #+#    #+#             */
-/*   Updated: 2024/11/22 16:23:35 by jquinodo         ###   ########.fr       */
+/*   Updated: 2024/11/23 09:19:07 by jquinodo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include <signal.h>
-#include <stdio.h>
-#include <string.h>
 
-void	send_signal(int pid, unsigned char character)
+void	send_signal(int pid, unsigned char c)
 {
 	int				i;
 	unsigned char	temp_char;
 
 	i = 8;
-	temp_char = character;
+	temp_char = c;
 	while (i > 0)
 	{
 		i--;
-		temp_char = character >> i;
+		temp_char = c >> i;
 		if (temp_char % 2 == 0)
 			kill(pid, SIGUSR2);
 		else
@@ -42,7 +39,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		ft_printf("Usage: %s <pid> <message>\n", argv[0]);
+		ft_printf("FAUX - utilise 2 arguments: %s <pid> <message>\n", argv[0]);
 		exit(0);
 	}
 	server_pid = ft_atoi(argv[1]);
